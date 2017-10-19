@@ -8,15 +8,25 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.state = {
-  //     videoData: props.searchYouTube({query: 'tay zonday', max: 10, key: window.YOUTUBE_API_KEY}, function() {})
-  //   };
-  //   this.render();
-  // }
+  componentDidMount() {
+    this.getYouTubeVideos('rick');
+  }
+
+  getYouTubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videos) => 
+      this.setState({
+        videoData: videos,
+        currentVideo: videos[0]
+      })
+    );
+  }
 
   onVideoListEntryClick(video) {
-    // console.log(video)
     this.setState({
       currentVideo: video
     });
@@ -29,7 +39,11 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div>
+              <Search
+                handleSearchInputChange={this.getYouTubeVideos.bind(this)}
+              />
+            </div>
           </div>
         </nav>
         <div className="row">
