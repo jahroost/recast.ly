@@ -9,7 +9,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getYouTubeVideos('rick');
+    this.getYouTubeVideos('');
   }
 
   getYouTubeVideos(query) {
@@ -41,7 +41,7 @@ class App extends React.Component {
           <div className="col-md-6 offset-md-3">
             <div>
               <Search
-                handleSearchInputChange={this.getYouTubeVideos.bind(this)}
+                handleSearchInputChange={ _.debounce( this.getYouTubeVideos.bind(this), 500 )}
               />
             </div>
           </div>
