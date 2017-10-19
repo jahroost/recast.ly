@@ -1,11 +1,19 @@
 class App extends React.Component {
   constructor (props) {
-    console.log(props);
     super(props);
     this.state = {
       videoData: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0],
+      autoplay: false,
+      thingToAdd: ''
     };
+  }
+
+  toggleAutoplay () {
+    this.setState({
+      autoplay: !this.state.autoplay,
+      thingToAdd: (!this.state.autoplay ? '?autoplay=1' : '')
+    });
   }
 
   componentDidMount() {
@@ -49,7 +57,10 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-7">
             <div>
-              <VideoPlayer video={this.state.currentVideo} />
+              <VideoPlayer video={this.state.currentVideo} autoplay={this.state.autoplay} thingToAdd={this.state.thingToAdd}/>
+              <div>
+                <button type="button" className="autoplay-button" onClick={this.toggleAutoplay.bind(this)}>Auto Play</button>
+              </div>
             </div>
           </div>
           <div className="col-md-5" >
