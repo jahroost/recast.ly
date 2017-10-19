@@ -1,5 +1,6 @@
 class App extends React.Component {
   constructor (props) {
+    console.log(props);
     super(props);
     this.state = {
       videoData: window.exampleVideoData,
@@ -7,12 +8,20 @@ class App extends React.Component {
     };
   }
 
+  // componentDidMount() {
+  //   this.state = {
+  //     videoData: props.searchYouTube({query: 'tay zonday', max: 10, key: window.YOUTUBE_API_KEY}, function() {})
+  //   };
+  //   this.render();
+  // }
+
   onVideoListEntryClick(video) {
     // console.log(video)
     this.setState({
       currentVideo: video
     });
   }
+
 
   render() {
 
